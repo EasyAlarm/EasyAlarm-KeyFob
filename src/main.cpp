@@ -1,10 +1,6 @@
 #include <Arduino.h>
 #include <LowPower.h>
-
-#define ARM_BUTTON 3
-#define DISARM_BUTTON 4
-#define LED_PIN A0
-#define INTERRUPT_PIN 2
+#include "pins.h"
 
 bool isAwaken = false;
 
@@ -15,8 +11,10 @@ void WakeUp();
 void setup()
 {
   Serial.begin(9600);
-  pinMode(ARM_BUTTON, INPUT);
+  pinMode(ARM_LOCKDOWN_BUTTON, INPUT);
+  pinMode(ARM_NIGHT_BUTTON, INPUT);
   pinMode(DISARM_BUTTON, INPUT);
+  pinMode(PANIC_BUTTON, INPUT);
   pinMode(INTERRUPT_PIN, INPUT);
   pinMode(LED_PIN, OUTPUT);
 
@@ -42,35 +40,26 @@ void loop()
   {
     delay(100);
     //if both buttons are pressed
-    if (digitalRead(ARM_BUTTON) == HIGH && digitalRead(DISARM_BUTTON) == HIGH)
+    if (digitalRead(ARM_LOCKDOWN_BUTTON) == HIGH)
     {
-      for (int i = 0; i < 100; i++)
-      {
-        digitalWrite(LED_PIN, HIGH);
-        delay(50);
-        digitalWrite(LED_PIN, LOW);
-        delay(50);
-      }
+      Serial.println("lockdown");
     }
-    else if (digitalRead(ARM_BUTTON) == HIGH)
+    else if (digitalRead(ARM_NIGHT_BUTTON) == HIGH)
     {
-      for (int i = 0; i < 10; i++)
-      {
-        digitalWrite(LED_PIN, HIGH);
-        delay(100);
-        digitalWrite(LED_PIN, LOW);
-        delay(100);
-      }
+      Serial.println("night");
     }
     else if (digitalRead(DISARM_BUTTON) == HIGH)
     {
-      digitalWrite(LED_PIN, HIGH);
-      delay(1000);
-      digitalWrite(LED_PIN, LOW);
+      Serial.println("disarm");
+    }
+    else if (digitalRead(PANIC_BUTTON) == HIGH)
+    {
+      Serial.println("panic");
     }
   }
 
   isAwaken = false;
 
+  Serial.flush();
   LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
 }

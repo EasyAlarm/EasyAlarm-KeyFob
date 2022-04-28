@@ -1,0 +1,8 @@
+#define CE_PIN 7
+#define CSN_PIN 8
+#define ARM_LOCKDOWN_BUTTON 4
+#define ARM_NIGHT_BUTTON 3
+#define DISARM_BUTTON 6
+#define PANIC_BUTTON 5
+#define LED_PIN A0
+#define INTERRUPT_PIN 2

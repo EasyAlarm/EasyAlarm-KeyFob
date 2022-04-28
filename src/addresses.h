@@ -1,0 +1,2 @@
+#define HUB_NODE 00
+#define PAIRING_NODE 01
