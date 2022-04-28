@@ -12,7 +12,7 @@ enum class PayloadType : uint16_t
 struct RadioPacket
 {
     char header[4] = "rph";
-    char address[7] = "a0000g";
+    char address[7] = "d0000a";
     //dynamic allocaton
     char content[3];
     PayloadType payload;
