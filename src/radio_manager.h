@@ -23,6 +23,8 @@ public:
     RadioManager(uint16_t cePin, uint16_t csnPin, uint16_t thisNode);
     RadioManager();
     void Init();
+    void PowerDown();
+    void PowerUp();
     void SendPacket(uint16_t receiverNode, RadioPacket* radioPacket);
     bool HasReceivedPacket(RadioPacket* radioPacket);
     void Update();

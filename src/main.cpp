@@ -70,7 +70,7 @@ void loop()
   }
 
   isAwaken = false;
-
+  radioManager.PowerDown();
   Serial.flush();
   LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
 }
@@ -78,6 +78,7 @@ void loop()
 void WakeUp()
 {
   Serial.println("Interrupt called");
+  radioManager.PowerUp();
   isAwaken = true;
 }
 

@@ -13,6 +13,16 @@ RadioManager::RadioManager()
 
 }
 
+void RadioManager::PowerDown()
+{
+    radio.powerDown();
+}
+
+void RadioManager::PowerUp()
+{
+    radio.powerUp();
+}
+
 void RadioManager::Init()
 {
     radio = RF24(cePin, csnPin);
